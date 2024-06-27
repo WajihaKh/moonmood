@@ -1,9 +1,17 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Switch } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function HomeScreen() {
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+
+  const toggleNotifications = () => {
+    setNotificationsEnabled(previousState => !previousState);
+  };
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
@@ -21,6 +29,16 @@ export default function HomeScreen() {
         <FontAwesome name="camera" size={24} color="#333" style={styles.buttonIcon} />
         <Text style={styles.buttonText}>Add Photo</Text>
       </TouchableOpacity>
+      <View style={styles.notificationContainer}>
+        <Text style={styles.notificationText}>Notifications</Text>
+        <Switch
+          trackColor={{ false: "#263126", true: "#B9BBB8" }}
+          thumbColor={notificationsEnabled ? "#d1e7dd" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleNotifications}
+          value={notificationsEnabled}
+        />
+      </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>“Your mood is the reflection of your soul”</Text>
       </View>
@@ -85,5 +103,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     fontStyle: 'italic',
+  },
+  notificationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  notificationText: {
+    fontSize: 18,
+    marginRight: 10,
   },
 });

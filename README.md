@@ -16,3 +16,15 @@ In phase one, I had to:
 Phase one involved testing proof of life with no major changes and brainstorming mini project ideas.
 
 [Proof Of Life](./assets/images/proof-of-life.PNG)
+
+**Moon Mood is a mobile application designed to help users track and manage their daily moods effectively**
+
+**key features**
+
+- Logging Daily Moods
+- Viewing Mood Trends
+- Adding Photos
+- Notifications Integration
+
+ Moon Mood aims to help users reflect on their emotional well-being, fostering mindfulness and awareness of mood patterns. By visualizing trends and encouraging daily reflection, it promotes mental health awareness and self-care.
+ 
