@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function LogMoodScreen() {
   const [mood, setMood] = useState('');
   const [notes, setNotes] = useState('');
 
-  const handleSave = () => {
-    // Logic to save mood and notes
-    console.log('Mood:', mood, 'Notes:', notes);
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Log your Mood:</Text>
-      <TextInput style={styles.input} value={mood} onChangeText={setMood} placeholder="Happy, Sad, etc." />
-      <Text style={styles.label}>Notes:</Text>
-      <TextInput style={styles.input} value={notes} onChangeText={setNotes} placeholder="Additional notes" multiline />
-      <Button title="Save" onPress={handleSave} />
+      <Text style={styles.title}>Log Daily Mood</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your mood"
+        placeholderTextColor="#888"
+        value={mood}
+        onChangeText={setMood}
+      />
+      <TextInput
+        style={styles.textarea}
+        placeholder="Add notes (optional)"
+        placeholderTextColor="#888"
+        value={notes}
+        onChangeText={setNotes}
+        multiline={true}
+        numberOfLines={4}
+      />
+      <TouchableOpacity style={styles.button} onPress={() => alert('Mood logged!')}>
+        <Text style={styles.buttonText}>Save Mood</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -24,18 +34,49 @@ export default function LogMoodScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
+    padding: 20,
+    backgroundColor: '#f5f5f5',
   },
-  label: {
-    fontSize: 18,
-    marginVertical: 8,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
+    textAlign: 'center',
   },
   input: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 8,
-    marginVertical: 8,
-    borderRadius: 4,
+    borderColor: '#ddd',
+  },
+  textarea: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  button: {
+    backgroundColor: '#d1e7dd',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  buttonText: {
+    color: '#333',
+    fontSize: 18,
+    fontWeight: '500',
   },
 });

@@ -1,27 +1,19 @@
-import React, { useState } from 'react';
-import { View, Button, Image, StyleSheet } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import React from 'react';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function AddPhotoScreen() {
-  const [image, setImage] = useState(null);
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
-
   return (
     <View style={styles.container}>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={styles.image} />}
+      <Text style={styles.title}>Add Photo</Text>
+      <TouchableOpacity style={styles.button} onPress={() => alert('Open camera')}>
+        <FontAwesome name="camera" size={24} color="#333" style={styles.buttonIcon} />
+        <Text style={styles.buttonText}>Take a Photo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => alert('Open image picker')}>
+        <FontAwesome name="image" size={24} color="#333" style={styles.buttonIcon} />
+        <Text style={styles.buttonText}>Choose from Gallery</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -29,12 +21,39 @@ export default function AddPhotoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
-    width: 200,
-    height: 200,
-    marginTop: 20,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#d1e7dd', // Sage green
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginBottom: 20,
+    width: '80%',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  buttonIcon: {
+    marginRight: 10,
+  },
+  buttonText: {
+    color: '#333',
+    fontSize: 18,
+    fontWeight: '500',
   },
 });
